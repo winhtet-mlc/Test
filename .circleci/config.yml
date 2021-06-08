@@ -15,5 +15,5 @@ jobs:
           name: test the generated html files
           command: htmlproofer /src/public --allow-hash-href --check-html --empty-alt-ignore --disable-external
       - deploy:
-          name: push to branch
+          name: push
           command: sh deploy.sh

@@ -9,7 +9,7 @@ rsync -arv public/ master --delete --exclude ".git"
 cp README.md master/
 
 echo "* pushing to branch:"
-cd development
+cd master
 git config user.name "CircleCI"
 git config user.email ${GIT_EMAIL}
 git add -A
