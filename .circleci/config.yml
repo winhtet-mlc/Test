@@ -11,9 +11,20 @@ jobs:
       - checkout
       - run: git submodule update --init
       - run: hugo -v -s /src -d /src/public
+
+  test:
+    docker:
+      - image: z0li/hugo-builder:latest
+    working_directory: /src
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "SHA256:YqqyqmJ6rOhe35usytk4an2NTbyFCV6jdkeyk95VjLQ CircleCI"
+      - checkout
       - run:
           name: test the generated html files
           command: htmlproofer /src/public --allow-hash-href --check-html --empty-alt-ignore --disable-external
+
   deploy:
     docker:
       - image: z0li/hugo-builder:latest
@@ -31,4 +42,5 @@ workflows:
   build_and_test:
     jobs:
       - build
+      - test
       - deploy
